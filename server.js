@@ -6,6 +6,7 @@
 const cors = require('cors');
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser');
 
 const { PrismaClient } = require('@prisma/client');
 
@@ -19,6 +20,8 @@ app.use(
     credentials: true,
   })
 );
+
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/text', (req, res) => {
@@ -32,24 +35,22 @@ app.get('/api/users', async (req, res) => {
 
 // post route for creating a new configuration with data passed from client
 app.post('/api/configuration', async (req, res) => {
-  console.log('req', req);
+  // console.log('req', Object.keys(req));
+  console.log('req.body', req.body);
   const configuration = await prisma.configuration.create({
-    data: {
-      name: 'test',
-      description: 'test',
-      color: 'test',
-    },
+    data: req.body,
   });
   res.json(configuration);
 });
 
 // a get route for retrieving all configurations
 app.get('/api/configurations', async (req, res) => {
-  // const configurations = await prisma.configuration.findMany();
-  res.json({
-    name: 'casey',
-  });
-  // res.json(configurations);
+  const configurations = await prisma.configuration.findMany();
+  // res.json({
+  //   name: 'casey',
+  // });
+  // console.log('configurations', configurations);
+  res.json(configurations);
 });
 
 app.listen(3001, () => {
