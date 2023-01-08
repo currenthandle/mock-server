@@ -24,18 +24,8 @@ app.use(
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/text', (req, res) => {
-  res.send('something different');
-});
-
-app.get('/api/users', async (req, res) => {
-  const users = await prisma.user.findMany();
-  res.json(users);
-});
-
 // post route for creating a new configuration with data passed from client
 app.post('/api/configuration', async (req, res) => {
-  // console.log('req', Object.keys(req));
   console.log('req.body', req.body);
   const configuration = await prisma.configuration.create({
     data: req.body,
@@ -46,10 +36,6 @@ app.post('/api/configuration', async (req, res) => {
 // a get route for retrieving all configurations
 app.get('/api/configurations', async (req, res) => {
   const configurations = await prisma.configuration.findMany();
-  // res.json({
-  //   name: 'casey',
-  // });
-  // console.log('configurations', configurations);
   res.json(configurations);
 });
 
