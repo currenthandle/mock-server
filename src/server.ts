@@ -1,16 +1,15 @@
-// a basic express server that serves static files from the public folder
-// connect to sqlite database with prisma
+import cors from 'cors';
+import express from 'express';
+import path from 'path';
+import { PrismaClient } from '@prisma/client';
+import bodyParser from 'body-parser';
+// const cors = require('cors');
+// const express = require('express');
+// const path = require('path');
+// const { PrismaClient } = require('@prisma/client');
+// const bodyParser = require('body-parser');
 
-// import cors from 'cors';
-
-const cors = require('cors');
-const express = require('express');
-const path = require('path');
-const bodyParser = require('body-parser');
-
-const { PrismaClient } = require('@prisma/client');
-
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
 const app = express();
 
