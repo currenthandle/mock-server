@@ -35,8 +35,13 @@ app.post('/api/configuration', async (req, res) => {
   res.json(configuration);
 });
 
+app.delete('/api/configurations', async (req, res) => {
+  const configurations = await prisma.configuration.deleteMany();
+  res.json(configurations);
+});
+
 // a get route for retrieving all configurations
-app.get('/api/configurations', async (req, res) => {
+app.get('/api/configurations', async (_req, res) => {
   const configurations = await prisma.configuration.findMany();
   res.json(configurations);
 });
