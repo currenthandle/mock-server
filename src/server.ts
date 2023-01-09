@@ -28,7 +28,6 @@ app.use(
 
 // post route for creating a new configuration with data passed from client
 app.post('/api/configuration', async (req, res) => {
-  console.log('req.body', req.body);
   const configuration = await prisma.configuration.create({
     data: req.body,
   });
