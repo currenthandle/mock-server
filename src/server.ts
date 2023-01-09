@@ -1,17 +1,22 @@
 import cors from 'cors';
 import express from 'express';
-import path from 'path';
 import { PrismaClient } from '@prisma/client';
 import bodyParser from 'body-parser';
-// const cors = require('cors');
-// const express = require('express');
-// const path = require('path');
-// const { PrismaClient } = require('@prisma/client');
-// const bodyParser = require('body-parser');
-
-// const prisma = new PrismaClient();
 
 const app = express();
+
+/*
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const parent = __filename.split('/').slice(0, -2);
+parent.push('public');
+const pathToPublic = parent.join('/');
+const __dirname = path.dirname(pathToPublic);
+app.use(express.static(path.join(__dirname, 'public')));
+*/
+
+const prisma = new PrismaClient();
 
 app.use(
   cors({
@@ -21,7 +26,6 @@ app.use(
 );
 
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
 
 // post route for creating a new configuration with data passed from client
 app.post('/api/configuration', async (req, res) => {
