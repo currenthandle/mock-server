@@ -20,7 +20,7 @@ const prisma = new PrismaClient();
 
 app.use(
   cors({
-    origin: ['http://localhost:3000', 'http://localhost:3001'],
+    origin: ['http://localhost:3000'],
     credentials: true,
   }),
   bodyParser.json()
@@ -35,7 +35,7 @@ app.post('/api/configuration', async (req, res) => {
   res.json(configuration);
 });
 
-app.delete('/api/configurations', async (req, res) => {
+app.delete('/api/configurations', async (_req, res) => {
   const configurations = await prisma.configuration.deleteMany();
   res.json(configurations);
 });
