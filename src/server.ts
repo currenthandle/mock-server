@@ -22,10 +22,9 @@ app.use(
   cors({
     origin: ['http://localhost:3000', 'http://localhost:3001'],
     credentials: true,
-  })
+  }),
+  bodyParser.json()
 );
-
-app.use(bodyParser.json());
 
 // post route for creating a new configuration with data passed from client
 app.post('/api/configuration', async (req, res) => {
